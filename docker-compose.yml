@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  clientservice:
+    network_mode: bridge
+    container_name: clientservice
+    image: bogdannaida/client-service:latest
+    build: ./
+    ports:
+      - "8086:8086"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=clientservice
+      - DB_SERVER=postgresqldb-clients
+    links:
+      - postgresqldb-clients
+
+  postgresqldb-clients:
+    network_mode: bridge
+    image: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=clientservice
+    volumes:
+      - postgres-data-clients:/home/bogdannaida/Projects/IntelliJ-projects/Volumes/
+volumes:
+  postgres-data-clients:
