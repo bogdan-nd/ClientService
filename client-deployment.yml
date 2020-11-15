@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: clientservice
+  name: clientservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: clientservice
+  strategy: { }
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: clientservice
+    spec:
+      containers:
+        - env:
+            - name: DB_SERVER
+              value: postgresqldb-clients
+            - name: POSTGRES_DB
+              value: clientservice
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: postgres
+          image: bogdannaida/client-service:latest
+          imagePullPolicy: ""
+          name: clietn-service
+          ports:
+            - containerPort: 8086
+          resources: { }
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: postgres-data-clients
+          persistentVolumeClaim:
+            claimName: postgres-data-clients
+status: { }
