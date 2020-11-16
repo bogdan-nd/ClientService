@@ -5,6 +5,7 @@ import com.services.client.entity.Client;
 import com.services.client.service.ClientService;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +24,17 @@ public class ClientController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Client> showClientById(@PathVariable UUID id) throws NotFoundException {
-        return ResponseEntity.ok(clientService.getById(id));
+    public ResponseEntity<Client> showClientById(@PathVariable UUID id){
+        try {
+            return ResponseEntity.ok(clientService.getById(id));
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
     }
-
 
     @PostMapping
     public ResponseEntity<Client> addClient(@RequestBody ClientDTO clientDTO) {
@@ -34,6 +42,19 @@ public class ClientController {
                 clientDTO.getHorsemanStatus());
 
         return ResponseEntity.ok(clientService.saveClient(newClient));
+    }
+
+    @PatchMapping("{id}/spend/{moneyAmount}")
+    public ResponseEntity<Client> showClientById(@PathVariable UUID id, @PathVariable int moneyAmount){
+        try {
+            return ResponseEntity.ok(clientService.spendMoney(id,moneyAmount));
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
     }
 
     @DeleteMapping("{id}")
