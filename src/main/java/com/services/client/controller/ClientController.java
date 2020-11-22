@@ -44,10 +44,23 @@ public class ClientController {
         return ResponseEntity.ok(clientService.saveClient(newClient));
     }
 
-    @PatchMapping("{id}/spend/{moneyAmount}")
-    public ResponseEntity<Client> showClientById(@PathVariable UUID id, @PathVariable int moneyAmount){
+    @PostMapping("{id}/spend/{moneyAmount}")
+    public ResponseEntity<Client> clientSpendMoney(@PathVariable UUID id, @PathVariable int moneyAmount){
         try {
-            return ResponseEntity.ok(clientService.spendMoney(id,moneyAmount));
+            return ResponseEntity.ok(clientService.clientSpendMoney(id,moneyAmount));
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+    }
+
+    @PostMapping("{id}/get/{moneyAmount}")
+    public ResponseEntity<Client> clientGetMoney(@PathVariable UUID id, @PathVariable int moneyAmount){
+        try {
+            return ResponseEntity.ok(clientService.clientEarnMoney(id,moneyAmount));
         }
         catch (NotFoundException e)
         {

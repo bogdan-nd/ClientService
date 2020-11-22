@@ -37,6 +37,8 @@ public class Client {
         creditMoney += moneyAmount;
     }
 
+    public void getMoney(int moneyAmount){creditMoney -= moneyAmount;}
+
     public boolean sameClient(Client secondClient){
         return id.equals(secondClient.id);
     }

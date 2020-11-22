@@ -32,9 +32,17 @@ public class ClientService {
     }
 
     @Transactional
-    public Client spendMoney(UUID id, int moneyAmount) throws NotFoundException {
+    public Client clientSpendMoney(UUID id, int moneyAmount) throws NotFoundException {
         Client client = getById(id);
         client.spendMoney(moneyAmount);
+        saveClient(client);
+        return client;
+    }
+
+    @Transactional
+    public Client clientEarnMoney(UUID id, int moneyAmount) throws NotFoundException {
+        Client client = getById(id);
+        client.getMoney(moneyAmount);
         saveClient(client);
         return client;
     }
