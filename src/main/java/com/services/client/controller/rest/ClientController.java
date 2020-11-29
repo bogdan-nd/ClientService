@@ -1,4 +1,4 @@
-package com.services.client.controller;
+package com.services.client.controller.rest;
 
 import com.services.client.dto.ClientDTO;
 import com.services.client.entity.Client;
