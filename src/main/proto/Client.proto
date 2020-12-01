@@ -11,7 +11,7 @@ message ProtoClient{
   string sportCategory = 5;
 }
 
-message Empty{
+message ClientEmpty{
 }
 
 message ClientResponse{
@@ -22,7 +22,7 @@ message ClientRequest{
   ProtoClient horse = 1;
 }
 
-message IdRequest{
+message ClientIdRequest{
   string id=1;
 }
 
@@ -30,19 +30,19 @@ message intRequest{
   int32 moneyAmount=1;
 }
 
-message MoneyRequest{
+message ClientMoneyRequest{
   string id = 1;
   int32 moneyAmount=2;
 }
 
-message StringResponse{
+message ClientStringResponse{
   string answer = 1;
 }
 
 service ClientService{
-  rpc getClients(Empty) returns (ClientResponse);
-  rpc getClientById(IdRequest) returns (ClientResponse);
+  rpc getClients(ClientEmpty) returns (ClientResponse);
+  rpc getClientById(ClientIdRequest) returns (ClientResponse);
   rpc addClient(ClientRequest) returns (ClientResponse);
-  rpc spendMoney(MoneyRequest) returns (StringResponse);
-  rpc earnMoney(MoneyRequest) returns (StringResponse);
+  rpc spendMoney(ClientMoneyRequest) returns (ClientStringResponse);
+  rpc earnMoney(ClientMoneyRequest) returns (ClientStringResponse);
 }

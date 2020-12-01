@@ -20,7 +20,7 @@ public class ClientGrpcServer extends ClientServiceGrpc.ClientServiceImplBase {
     private final ClientService clientService;
 
     @Override
-    public void getClients(Empty request, StreamObserver<ClientResponse> responseObserver) {
+    public void getClients(ClientEmpty request, StreamObserver<ClientResponse> responseObserver) {
         List<Client> clients = clientService.findAll();
         List<ProtoClient> protoClients = transformClients(clients);
 
@@ -32,7 +32,7 @@ public class ClientGrpcServer extends ClientServiceGrpc.ClientServiceImplBase {
     }
 
     @Override
-    public void getClientById(IdRequest request, StreamObserver<ClientResponse> responseObserver) {
+    public void getClientById(ClientIdRequest request, StreamObserver<ClientResponse> responseObserver) {
         UUID id = UUID.fromString(request.getId());
         ClientResponse response;
         try {
@@ -65,15 +65,15 @@ public class ClientGrpcServer extends ClientServiceGrpc.ClientServiceImplBase {
     }
 
     @Override
-    public void spendMoney(MoneyRequest request, StreamObserver<StringResponse> responseObserver) {
+    public void spendMoney(ClientMoneyRequest request, StreamObserver<ClientStringResponse> responseObserver) {
         String id = request.getId();
         UUID clientId = UUID.fromString(id);
         int money = request.getMoneyAmount();
-        StringResponse response;
+        ClientStringResponse response;
 
         try {
             clientService.clientSpendMoney(clientId, money);
-            response = StringResponse.newBuilder()
+            response = ClientStringResponse.newBuilder()
                     .setAnswer(String.format("Client with %s id spend %s $", clientId,money))
                     .build();
 
@@ -86,15 +86,15 @@ public class ClientGrpcServer extends ClientServiceGrpc.ClientServiceImplBase {
     }
 
     @Override
-    public void earnMoney(MoneyRequest request, StreamObserver<StringResponse> responseObserver) {
+    public void earnMoney(ClientMoneyRequest request, StreamObserver<ClientStringResponse> responseObserver) {
         String id = request.getId();
         UUID clientId = UUID.fromString(id);
         int money = request.getMoneyAmount();
-        StringResponse response;
+        ClientStringResponse response;
 
         try {
             clientService.clientEarnMoney(clientId, money);
-            response = StringResponse.newBuilder()
+            response = ClientStringResponse.newBuilder()
                     .setAnswer(String.format("Client with %s id earned %s $", clientId,money))
                     .build();
 
