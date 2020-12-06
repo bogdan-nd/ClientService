@@ -13,6 +13,9 @@ spec:
     - name: "8086"
       port: 8086
       targetPort: 8086
+    - name: "9090"
+      port: 9090
+      targetPort: 9090
   selector:
     io.kompose.service: clientservice
 status:
