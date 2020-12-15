@@ -1,6 +1,6 @@
 package com.services.client.controller.rest;
 
-import com.services.client.dto.ClientDTO;
+import com.services.client.controller.rest.dto.ClientDTO;
 import com.services.client.entity.Client;
 import com.services.client.service.ClientService;
 import javassist.NotFoundException;

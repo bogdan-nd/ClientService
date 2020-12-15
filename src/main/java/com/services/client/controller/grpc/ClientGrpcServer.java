@@ -1,8 +1,8 @@
 package com.services.client.controller.grpc;
 
 import com.services.client.entity.Client;
-import com.services.client.enums.HorsemanStatus;
-import com.services.client.enums.SportsCategory;
+import com.services.client.entity.enums.HorsemanStatus;
+import com.services.client.entity.enums.SportsCategory;
 import com.services.client.service.ClientService;
 import com.services.grpc.server.horse.*;
 import io.grpc.stub.StreamObserver;

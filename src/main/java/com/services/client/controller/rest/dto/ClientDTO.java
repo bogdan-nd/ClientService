@@ -1,8 +1,8 @@
-package com.services.client.dto;
+package com.services.client.controller.rest.dto;
 
 
-import com.services.client.enums.HorsemanStatus;
-import com.services.client.enums.SportsCategory;
+import com.services.client.entity.enums.HorsemanStatus;
+import com.services.client.entity.enums.SportsCategory;
 import lombok.Data;
 
 

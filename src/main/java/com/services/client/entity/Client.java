@@ -1,8 +1,8 @@
 package com.services.client.entity;
 
 
-import com.services.client.enums.HorsemanStatus;
-import com.services.client.enums.SportsCategory;
+import com.services.client.entity.enums.HorsemanStatus;
+import com.services.client.entity.enums.SportsCategory;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
